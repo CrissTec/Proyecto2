@@ -3,7 +3,7 @@ const router = express.Router();
 
 const administradorController = require('../controllers/administradores.controller');
 
-//rutas de las transacciones
+//rutas de las tratamientoes
 
 //CRUD de funcionario
 router.get('/:nodo/readfuncionario',administradorController.readfuncionario);
@@ -20,17 +20,17 @@ router.post('/:nodo/creatediagnosticoCatalogo', administradorController.createdi
 router.put('/:nodo/:id/updatediagnosticoCatalogo', administradorController.updatediagnosticoCatalogo);
 router.delete('/:nodo/:id/deletediagnosticoCatalogo', administradorController.deletediagnosticoCatalogo);
 
-//CRUD de transaccionCatalogo
-router.get('/:nodo/readtransaccionCatalogo',administradorController.readtransaccionCatalogo);
-router.get('/:nodo/:id/readtransaccionCatalogoById', administradorController.readtransaccionCatalogoById);
-router.post('/:nodo/createtransaccionCatalogo', administradorController.createtransaccionCatalogo);
-router.put('/:nodo/:id/updatetransaccionCatalogo', administradorController.updatetransaccionCatalogo);
-router.delete('/:nodo/:id/deletetransaccionCatalogo', administradorController.deletetransaccionCatalogo);
+//CRUD de tratamientoCatalogo
+router.get('/:nodo/readtratamientoCatalogo',administradorController.readtratamientoCatalogo);
+router.get('/:nodo/:id/readtratamientoCatalogoById', administradorController.readtratamientoCatalogoById);
+router.post('/:nodo/createtratamientoCatalogo', administradorController.createtratamientoCatalogo);
+router.put('/:nodo/:id/updatetratamientoCatalogo', administradorController.updatetratamientoCatalogo);
+router.delete('/:nodo/:id/deletetratamientoCatalogo', administradorController.deletetratamientoCatalogo);
 
 //CRUD de centroDeAtencion
 router.get('/:nodo/readcentroDeAtencion',administradorController.readcentroDeAtencion);
-router.get('/:nodo/:cod/readcentroDeAtencionByCodigo', administradorController.readcentroDeAtencionByCedula);
+router.get('/:nodo/:cod/readcentroDeAtencionByCodigo', administradorController.readcentroDeAtencionByCodigo);
 router.post('/:nodo/createcentroDeAtencion', administradorController.createcentroDeAtencion);
 router.put('/:nodo/:cod/updatecentroDeAtencion', administradorController.updatecentroDeAtencion);
 router.delete('/:nodo/:cod/deletecentroDeAtencion', administradorController.deletecentroDeAtencion);
-module.exports = router;
+module.exports = router

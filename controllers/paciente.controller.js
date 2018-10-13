@@ -70,7 +70,7 @@ exports.updatePaciente = function(req, res){
 //Borra un paciente
 exports.deletePaciente = function(req, res){
     var tipo = "findOneAndDelete";
-    var query = req.params.id
+    var query = {cedula: req.params.ced}
     var modelo = Paciente;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){

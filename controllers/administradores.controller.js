@@ -1,7 +1,7 @@
 var ConnectDB = require('../database/access.js').ConnectDB;
 const Funcionario = require('../models/funcionario.model');
 const CentroDeAtencion = require('../models/centrodeatencion.model');
-const DiagnosticoCatalogo = require('../models/diagnosticoCatalogo.model');
+const DiagnosticoCatalogo = require('../models/diagnosticocatalogo.model');
 const TratamientoCatalogo = require('../models/tratamientocatalogo.model');
 //**********************************************************CRUD Funcionario****************************************************//
 
