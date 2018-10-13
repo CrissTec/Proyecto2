@@ -1,5 +1,5 @@
 <div menu ></div>
-<div class="container scroll"  ng-init="getAppoiments()" style="padding-top: 80px;">
+<div class="container "  ng-init="getAppoiments()" style="padding-top: 80px;">
 
 
 	<h2 ALIGN="center">Citas Registradas</h2>
@@ -11,13 +11,13 @@
              			placeholder="Busca una banda"
              			ng-model="search"
              		  
-                		class="full-width white-background"><br>
+                         class="form-control"><br>
             
                         
 		<ol class="list-group">
       		<li class="list-group-item" ng-repeat="app in apps | filter:search" >
        		
-				<a href="#/seeBand/{{band.id}}"><h3>{{app.nombre}}</h3></a>
+				<a href="#/seeBand/{{band.id}}"><h3>{{app}}</h3></a>
       
               </li>
         </ol>

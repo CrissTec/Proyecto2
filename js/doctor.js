@@ -10,7 +10,7 @@ app.config(function($routeProvider) {
 
 
 app.controller('appointmentsCtrl', function($scope){
-    $scope.shit="hola2222";
+    $scope.apps=[1,2,3,4,5,6,7,8,9,10];
 
 })
 
