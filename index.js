@@ -10,12 +10,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors({credentials:true, origin: true}))
 
 var pacientes = require('./routes/pacientes.route');
-//var administradores = require('./routes/administradores.js');
-//var citas = require('./routes/citas.js');
+var administradores = require('./routes/administradores.route');
+var citas = require('./routes/citas.route');
 
 app.use('/paciente', pacientes);
-//app.use('/administrador', administradores);
-//app.use('/cita', citas);
+app.use('/administrador', administradores);
+app.use('/cita', citas);
 
 app.use(function(req, res){
   res.send({status:false ,error:'Invalid URL'});

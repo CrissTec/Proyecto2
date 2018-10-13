@@ -1,1 +1,4 @@
 Problemas con las fechas: "yyyymmdd" no funciona pues mongo pide formato completo cuando se usa type:Date
+
+Delete paciente no verifica que este tenga citas asociadas sin cancelar
+

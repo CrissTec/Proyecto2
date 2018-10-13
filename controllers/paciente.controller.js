@@ -33,7 +33,7 @@ exports.readPaciente = function(req, res){
     });
 };
 
-//Obtiene un paciente
+//Obtiene un paciente por el id
 exports.readPacienteById = function(req, res){
     var tipo = "findById";
     var query = req.params.id;
@@ -44,11 +44,21 @@ exports.readPacienteById = function(req, res){
     });
 }
 
+//Obtiene un paciente por la cedula
+exports.readPacienteByCedula = function(req, res){
+    var tipo = "findOne";
+    var query = {cedula: req.params.cedula};
+    var modelo = Paciente;
+    var nodo = req.params.nodo
+    ConnectDB(nodo, tipo, modelo, query, function(json){
+        res.send(json)
+    });
+}
+
 //Actualiza un paciente
 exports.updatePaciente = function(req, res){
-    var tipo = "findByIdAndUpdate";
-    var query = {id: req.params.id, set: {$set: req.body}};
-    var modelo = Paciente;
+    var tipo = "findOneAndUpdate";
+    var query = {cedula: req.params.ced, set: {$set: req.body}};
     var modelo = Paciente;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){
@@ -59,7 +69,7 @@ exports.updatePaciente = function(req, res){
 
 //Borra un paciente
 exports.deletePaciente = function(req, res){
-    var tipo = "findByIdAndDelete";
+    var tipo = "findOneAndDelete";
     var query = req.params.id
     var modelo = Paciente;
     var nodo = req.params.nodo

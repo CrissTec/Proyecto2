@@ -1,4 +1,5 @@
 //BASE DE DATOS CENTRALIZADA
+
 var mongoose = require('mongoose');
 var mongoDB = "mongodb://localhost:27017/TECSalud"; // cambiar por la direccion de la base hosteada
 mongoose.connect(mongoDB);
@@ -24,7 +25,19 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
         })
     }
 
-    if (tipo == "findById"){
+    else if (tipo == "findOne"){
+        modelo.findOne(query, function(err, result){
+            if (err){
+                callback({status: false, error: 'Error en la lectura', err: -1})
+            }else{
+                callback(result)
+            }
+        })
+    
+
+    }
+
+    else if (tipo == "findById"){
         modelo.findById(query, function(err, result){
             if (err){
                 callback({status: false, error: 'Error en la lectura', err: -1})
@@ -34,7 +47,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
         })
     }
 
-    if (tipo == "save"){
+    else if (tipo == "save"){
         modelo.save(function(err){
             if (err){
                 callback({status: false, error: 'Error en la escritura', err: -1})
@@ -44,7 +57,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
         });
     }
 
-    if (tipo == "findByIdAndUpdate"){
+    else if (tipo == "findOneAndUpdate"){
         modelo.findByIdAndUpdate(query.id, query.set, function(err, updated){
             if (err){
                 callback({status: false, error: 'Error en la actualización', err: -1})
@@ -54,7 +67,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
         })
     }
 
-    if (tipo == "findByIdAndDelete"){
+    else if (tipo == "findOneAndDelete"){
         modelo.findByIdAndDelete(query, function(err, deleted){
             if (err){
                 callback({status: false, error: 'Error en el borrado', err: -1})
@@ -64,9 +77,12 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
         })
     }
 
+    else{
+        callback({status: false, error: 'Operacion aún no soportada', err: -1})
+    }
+
 
 }
-
 
 module.exports.ConnectDB = ConnectDB
 //AggregateDB = function(aggregate, model, callback){};
