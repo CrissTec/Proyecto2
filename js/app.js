@@ -30,12 +30,22 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
 })
 
 
+app.controller('menuCtrl',function($scope,$location){
 
+
+})
+
+
+
+app.controller('menu2Ctrl',function($scope,$location){
+
+
+})
 
 
 app.directive('menu', function() {
     return {
-       templateUrl: 'html/menu.html',
+       templateUrl: 'html/Menu.html',
          controller:"menuCtrl"
    };
 })

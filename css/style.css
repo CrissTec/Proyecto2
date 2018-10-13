@@ -1,46 +1,178 @@
-body {
-    background: #eee !important;
+.carousel-inner img {
+      -webkit-filter: grayscale(90%);
+      filter: grayscale(90%); /* make all photos black and white */ 
+      width: 39%; /* Set width to 100% */
+      margin: auto;
   }
-  
-  .wrapper {
-    margin-top: 80px;
-    margin-bottom: 80px;
+  .carousel-caption h3 {
+      color: #fff !important;
   }
-  
-  .form-signin {
-    max-width: 380px;
-    padding: 15px 35px 45px;
-    margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+
+
+div.scroll {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.columns {
+  columns: 2;
+}
+
+
+.full-width {
+  width: 100%;
+}
+.white-background {
+    background-color: #FFFFFF;
+}
+
+
+/*parte de login*/
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+body{
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+.back { 
+   position: absolute;
+    top: 10%;
+    left: 18%;
+    bottom: 0%;
+    min-width: 100vw;
+    max-height: 685px;
+    margin: 0 auto!important;
+    padding: 0 !important;
+    width: 100vw;
+    height: 685px;
+    z-index: -100;
+    transform: translateX(0%) translateY(0%);
+ 	  background: url('#') no-repeat;
+  	background-size: cover;
+  	transition: 1s opacity;
+    overflow: hidden;
+}
+.logo{
+  position: absolute;
+  width: 200px;
+  margin: -12px 0px 0px -12px;
+  padding: 0px
+}
+.headText{
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100; 
+  margin: 15% auto 0 5%;
+  color: white;
+}
+.headText h1:before{
+    font-family: FontAwesome;
+    content: "\f18c";
+    color: green;
+    margin: 5px;
+}
+.headText h1:after{
+    font-family: FontAwesome;
+    content: "\f18c";
+    color: green;
+    margin: 5px;
+}
+
+.background, .background .pane, .background .item, .background .item-complex .item-content {
+    background-color: #004253;
+}
+
+.background2{
+    background-color: #57BC90;
+}
+
+.letra{
+    color: #57BC90;
+}
+
+
+.boton{
+    background-color: #8b008b;
+    color:white;
+}
+
+.despuestit{
+    margin: 100px 10px 300px 200px; 
+}
+
+
+#video-background {
+/*  making the video fullscreen  */
+  position: absolute;
+  right: 0px; 
+  bottom: 0px;
+  min-width: 100%; 
+  min-height: 120%;
+  width: auto; 
+  height: 120%;
+  z-index: -100;
+}
+
+#polina { 
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100; 
+  background: rgba(165,165,175,0.7);
+  color: #000000;
+  padding: 2%;
+  width: 31%;
+  margin: 100px 5% 5% 500px;
+  float: right;
+}
+
+
+#polinami { 
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100; 
+  background: rgba(165,165,175,0.7);
+  color: #000000;
+  padding: 2%;
+  width: 31%;
+	height: auto;
+  margin: 50px 10px 300px 100px;
+  float: right;
+}
+
+#polinavi { 
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100; 
+  background: rgba(165,165,175,0.7);
+  color: #000000;
+  padding: 2%;
+  width: 31%;
+	height: auto;
+  margin: 350px -30px 70px -350px;
+  float: right;
+}
+
+#cuadroban{
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100; 
+  background: rgba(165,165,175,0.7);
+  color: #000000;
+  padding: 2%;
+  width: 31%;
+	height: auto;
+  margin: 350px -30px 70px -390px;
+  float: right;
+    
+}
+
+
+@media screen and (max-width: 100%) { 
+  #polina{
+    width:100%;
+	 height: 100;
+   margin-top: 0% !important;
+  } 
+  video{
+    display: none;
   }
-  .form-signin .form-signin-heading,
-  .form-signin .checkbox {
-    margin-bottom: 30px;
-  }
-  .form-signin .checkbox {
-    font-weight: normal;
-  }
-  .form-signin .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type="text"] {
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .form-signin input[type="password"] {
-    margin-bottom: 20px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  
+}
+@media screen and (max-device-width: auto) {
+  #bgvid { display: none; }
+}
