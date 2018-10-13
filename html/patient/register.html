@@ -1,0 +1,71 @@
+<div menu></div>
+<div class="container scroll" style="padding-top: 80px;" >
+<h1 ALIGN="center">Registrar Paciente</h1><br>
+  <div class="row">
+    <!-- left column -->
+    <br>		
+    <!-- edit form column -->
+    <div class="col-md-6 col-sm-12 col-xs-12 personal-info">
+      <form class="form-horizontal" id="registro" role="form" ng-submit="register()">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Nombre:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="patientData.nombre" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Apellido:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="patientData.apellido" type="text">
+          </div>
+        </div>	
+        <div class="form-group">
+            <label class="col-md-3 control-label">Cédula:</label>
+            <div class="col-md-8">
+              <input class="form-control" ng-model="patientData.cedula" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Tipo de Sangre:</label>
+            <div class="col-md-8">
+              <input class="form-control" ng-model="patientData.tipoSangre" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Nacionalidad:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="patientData.nacionalidad" type="text">
+          </div>
+        </div>
+		    <div class="form-group">
+          <label class="col-lg-3 control-label" >Lugar de Residencia:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="patientData.residencia" type="text">
+          </div>
+        </div>        
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Correo Electrónico:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="patientData.email" type="email">
+          </div>
+        </div>
+		    <div class="form-group">
+          <label class="col-lg-3 control-label">Fecha de Nacimiento:</label>
+            <div class="col-lg-8">
+			        <label>
+            	  <input ng-model="patientData.date" type="date"/>
+			        </label>  
+		      </div>
+        </div>                   				
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" value="Registrar" type="submit">
+            <span></span>
+            <input class="btn btn-default" value="Reestablecer" ng-click="resetData()" type="reset">
+          </div>
+        </div>	  
+      </form>
+    </div>
+  </div>  
+</div>
