@@ -12,18 +12,16 @@ app.use(cors({credentials:true, origin: true}))
 var pacientes = require('./routes/pacientes.route');
 var administradores = require('./routes/administradores.route');
 var citas = require('./routes/citas.route');
+var login = require('./routes/login.route');
 
 app.use('/paciente', pacientes);
 app.use('/administrador', administradores);
 app.use('/cita', citas);
+app.use('/login', login)
 
 app.use(function(req, res){
   res.send({status:false ,error:'Invalid URL'});
 });
-
-//app.get('/', function (req, res) {
-    //res.send('Hello, world!');
-//});
 
 //Utilizar la base de datos
 var access = require('./database/access.js')

@@ -29,9 +29,15 @@ exports.sacarCita = function (req, res) {
 
 //Paciente cancela la cita
 exports.cancelarCitaPaciente = function (req, res) {
-    var tipo = "findOneAndUpdate";
-    var fechaUmbral = Date.now - 1;
-    var constraints = { _id: req.params.id, fecha: { $lte: fechaUmbral } };
+    var tipo = "findOneAndUpdate";   
+    //fechas
+    var hoy = new Date(Date.now())
+    var ayer = new Date()
+    ayer.setDate(hoy.getDate()-1);
+    ayer.setMonth(hoy.getMonth());
+    ayer.setFullYear(hoy.getFullYear());
+    ayer.setHours(hoy.getHours());
+    var constraints = { _id: req.params.id, fecha: { $lte: ayer } };
     var query = { id: constraints, set: { estado: "Cancelada por persona" } };
     var modelo = Cita;
     var nodo = req.params.nodo
@@ -139,6 +145,48 @@ exports.agregarTratamientoCita = function (req, res) {
         } else {
             res.send(json);
         }
+    });
+}
+
+//cancela una cita como funcionario
+exports.cancelarCitaFuncionario= function (req, res) {
+    var tipo = "findOneAndUpdate";
+    //fechas
+    var hoy = new Date(Date.now())
+    var ayer = new Date()
+    ayer.setDate(hoy.getDate()-1);
+    ayer.setMonth(hoy.getMonth());
+    ayer.setFullYear(hoy.getFullYear());
+    ayer.setHours(hoy.getHours());
+
+    var constraints = { _id: req.params.id, fecha: { $lte: ayer } };
+    var query = { id: constraints, set: { estado: "Cancelada por funcionario" } };
+    var modelo = Cita;
+    var nodo = req.params.nodo
+    ConnectDB(nodo, tipo, modelo, query, function (json) {
+        res.send(json)
+    });
+}
+
+//report de citas secretaria
+exports.reportCitaSecretaria = function (req, res) {
+    var tipo = "find";
+    var query = {estado: "Registrada"};
+    var modelo = Cita;
+    var nodo = req.params.nodo;
+    ConnectDB(nodo, tipo, modelo, query, function(json){
+        res.send(json)
+    });
+}
+
+//asignar citas cancelada por un funcionario
+exports.reasignarCita = function(req, res){
+    var tipo = "findOneAndUpdate";
+    var query = { id: req.params.id, set: { fecha: req.params.fecha } };
+    var modelo = Cita;
+    var nodo = req.params.nodo
+    ConnectDB(nodo, tipo, modelo, query, function (json) {
+        res.send(json)
     });
 
 }

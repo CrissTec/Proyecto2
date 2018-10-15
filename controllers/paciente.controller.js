@@ -1,8 +1,9 @@
 const Paciente = require('../models/paciente.model');
+const Usuario = require('../models/usuario.model');
 var ConnectDB = require('../database/access.js').ConnectDB;
 
 //****************************************************CRUD Paciente******************************************** */
-//Inserta un paciente nuevo
+//Inserta un paciente nuevo y lo registra en el sistema
 exports.createPaciente = function(req, res){
     let paciente = new Paciente({
         nombre: req.body.nombre,
@@ -14,13 +15,26 @@ exports.createPaciente = function(req, res){
         lugarDeResidencia: req.body.lugarDeResidencia,
         telefono: req.body.telefono
     });
+
+    let usuario = new Usuario({
+        cedula: req.body.cedula,
+        tipo: "Paciente",
+        username: req.body.usuario,
+        password: req.body.password
+    })
     var tipo = "save"
     var query = {};
     var modelo = paciente
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){
-        res.send(json)
+        if (json.status == true){
+            modelo = usuario;
+            ConnectDB(nodo, tipo, modelo, query, function(json){
+                res.send(json)
+            })
+        }
     });
+
 }
 
 //Obtiene la información de todos los pacientes

@@ -3,8 +3,6 @@ const router = express.Router();
 
 const administradorController = require('../controllers/administradores.controller');
 
-//rutas de las tratamientoes
-
 //CRUD de funcionario
 router.get('/:nodo/readfuncionario',administradorController.readfuncionario);
 router.get('/:nodo/:id/readfuncionarioById', administradorController.readfuncionarioById);
@@ -33,4 +31,5 @@ router.get('/:nodo/:cod/readcentroDeAtencionByCodigo', administradorController.r
 router.post('/:nodo/createcentroDeAtencion', administradorController.createcentroDeAtencion);
 router.put('/:nodo/:cod/updatecentroDeAtencion', administradorController.updatecentroDeAtencion);
 router.delete('/:nodo/:cod/deletecentroDeAtencion', administradorController.deletecentroDeAtencion);
+
 module.exports = router
