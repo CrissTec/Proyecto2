@@ -225,7 +225,7 @@ exports.createtratamientoCatalogo = function(req, res){
     });
     var tipo = "save"
     var query = {};
-    var modelo = TratamientoCatalogo
+    var modelo = tratamientoCatalogo
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){
         res.send(json)

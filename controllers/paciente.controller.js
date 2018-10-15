@@ -1,6 +1,7 @@
 const Paciente = require('../models/paciente.model');
 var ConnectDB = require('../database/access.js').ConnectDB;
 
+//****************************************************CRUD Paciente******************************************** */
 //Inserta un paciente nuevo
 exports.createPaciente = function(req, res){
     let paciente = new Paciente({

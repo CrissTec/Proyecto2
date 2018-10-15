@@ -12,6 +12,7 @@ module.exports = db; //EXPORTA LA BASE CENTRALZADA
 
 //funciones para conectarse a la base
 ConnectDB = function(nodo, tipo, modelo, query, callback){
+    
     //console.log("Tipo: " + tipo +", query: " + query + ", modelo: " + modelo + ", nodo: " + nodo)
     
     //HACER LOGICA DE DISTRIBUCIÓN
@@ -20,7 +21,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
             if (err){
                 callback({status: false, error: 'Error en la lectura', err: -1})
             }else{
-                callback(result)
+                callback({status: true, resultado: result})
             }
         })
     }
@@ -30,7 +31,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
             if (err){
                 callback({status: false, error: 'Error en la lectura', err: -1})
             }else{
-                callback(result)
+                callback({status: true, resultado: result})
             }
         })
     
@@ -42,17 +43,19 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
             if (err){
                 callback({status: false, error: 'Error en la lectura', err: -1})
             }else{
-                callback(result)
+                callback({status: true, resultado: result})
             }
         })
     }
 
     else if (tipo == "save"){
-        modelo.save(function(err){
+        console.log(modelo)
+        modelo.save(function(err, guardado){
             if (err){
+                console.log(err)
                 callback({status: false, error: 'Error en la escritura', err: -1})
             }else{
-                callback({status: true, message: "Guardado correctamente", err: 0})
+                callback({status: true, guardado: guardado, message: "Guardado correctamente", err: 0})
             }
         });
     }
@@ -75,6 +78,20 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
                 callback({status: true, message: "Borrado correctamente", err: 0})
             }
         })
+    }else if(tipo == "populate"){
+        if (query.cantidad == 1){
+
+        }else if(query.cantidad == 2){
+            modelo.find(query.id).populate(query.populate.one).populate(query.populate.two).exec(function(err, json){
+                if (err){
+                    callback({status: false, error: 'Error en el reporte', err: -1})
+                }else{
+                    callback({status: true,  resultado: json, message: "Borrado correctamente", err: 0})
+                }
+            })
+
+            
+        }
     }
 
     else{
