@@ -75,7 +75,7 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
             if (err){
                 callback({status: false, error: 'Error en el borrado', err: -1})
             }else{
-                callback({status: true, message: "Borrado correctamente", err: 0})
+                callback({status: true, resultado: deleted, message: "Borrado correctamente", err: 0})
             }
         })
     }else if(tipo == "populate"){
@@ -86,14 +86,55 @@ ConnectDB = function(nodo, tipo, modelo, query, callback){
                 if (err){
                     callback({status: false, error: 'Error en el reporte', err: -1})
                 }else{
-                    callback({status: true,  resultado: json, message: "Borrado correctamente", err: 0})
+                    callback({status: true,  resultado: json, message: "Reporte correcto", err: 0})
                 }
             })
 
             
+        }else if (query.cantidad == 3){
+            modelo.find(query.id).populate(query.populate.one).populate(query.populate.two).populate(query.populate.three).exec(function(err, json){
+                if (err){
+                    console.log(err)
+                    callback({status: false, error: 'Error en el reporte', err: -1})
+                }else{
+                    callback({status: true,  resultado: json, message: "Reporte correcto", err: 0})
+                }
+            }) 
         }
-    }
+    }else if(tipo == "aggregate"){
 
+        if (query.cantidad == 0){
+            modelo.aggregate(query.id).exec(function(err, json){
+                if (err){
+                    console.log(err)
+                   callback({status: false, error: 'Error en el reporte', err: -1});
+                }else{
+                    callback({status: true,  resultado: json, message: "Reporte correcto", err: 0})
+                }
+            })
+        }
+        else{
+            if (query.tipo == "max"){
+                modelo.aggregate(query.id).sort({count: -1}).limit(query.cantidad).exec(function(err, json){
+                    if (err){
+                        callback({status: false, error: 'Error en el reporte', err: -1});
+
+                    }else{
+                        callback({status: true,  resultado: json, message: "Reporte correcto", err: 0})
+                    }
+                })
+            }
+        }
+    
+    }else if(tipo == "count"){
+        modelo.count(query, function(err, json){
+            if (err){
+                callback({status: false, error: 'Error en el reporte', err: -1});
+            }else{
+                callback({status: true,  resultado: json, message: "Reporte correcto", err: 0})
+            }
+        })
+    }
     else{
         callback({status: false, error: 'Operacion aún no soportada', err: -1})
     }

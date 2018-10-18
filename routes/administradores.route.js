@@ -32,4 +32,8 @@ router.post('/:nodo/createcentroDeAtencion', administradorController.createcentr
 router.put('/:nodo/:cod/updatecentroDeAtencion', administradorController.updatecentroDeAtencion);
 router.delete('/:nodo/:cod/deletecentroDeAtencion', administradorController.deletecentroDeAtencion);
 
+//reportes
+router.get('/:nodo/reporteDiagnosticada', administradorController.reporteDiagnosticada);
+router.get('/:nodo/reporteTratamientos', administradorController.reporteTratamientos);
+router.get('/:nodo/rangoDiagnosticos', administradorController.rangoDiagnosticos);
 module.exports = router

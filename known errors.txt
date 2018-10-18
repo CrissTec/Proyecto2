@@ -4,3 +4,4 @@ Delete paciente no verifica que este tenga citas asociadas sin cancelar
 
 Delete tratamiento catalogo no verifica que haya diagnosticoscatalogo asignados
 
+Cambiar como se obitenen los telefonos para evitar [[]]

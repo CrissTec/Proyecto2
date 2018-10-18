@@ -6,7 +6,7 @@ let tratamientoCatalogoSchema = new Schema({
     nombre: {type: String, required: true, unique: true, dropDups:true},
     tipo: {type: String, required: true}, // Medicamento, Cirugía, Curación, Sutura, Radiografía, Ultrasonido, Otros)
     dosis: {type: Number, required: true, min: 0},
-    monto: {type: Number, required: true, min:0} //id de los tratamientos
+    monto: {type: Number, required: true, min:0} 
 });
 
 
