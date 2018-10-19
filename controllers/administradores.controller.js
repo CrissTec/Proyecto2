@@ -5,6 +5,7 @@ const DiagnosticoCatalogo = require('../models/diagnosticocatalogo.model');
 const TratamientoCatalogo = require('../models/tratamientocatalogo.model');
 const DiagnosticoCita = require('../models/diagnosticocita.model');
 const TratamientoCita = require('../models/tratamientocita.model');
+const Cita = require('../models/cita.model')
 //**********************************************************CRUD Funcionario****************************************************//
 
 //Inserta un funcionario nuevo
@@ -318,18 +319,61 @@ exports.reporteTratamientos = function (req, res) {
                     ConnectDB(nodo, tipo, modelo, query, function (jsonCita) {
                         res.send(jsonPromedio)
                     });
-                }else{
-                    res.send({jsonCatalogo});
+                } else {
+                    res.send({ jsonCatalogo });
                 }
 
             });
-        }else{
+        } else {
             res.send(jsonPromedio)
         }
     });
 }
 
 //rango diagnosticos por paciente
-exports.rangoDiagnosticos = function(req, res){
-    
+exports.rangoDiagnosticos = function (req, res) {
+
+    var constraints = [{
+        $project: {
+            numeroDeDiag: { $size: "$diagnosticos" },
+            cedPaciente: 1
+        }
+    }]
+    var tipo = "aggregate"
+    var query = { id: constraints, tipo: "sorted", sort: {cedPaciente: 1, numeroDeDiag: 1} }
+    var modelo = Cita;
+    var nodo = req.params.nodo;
+    ConnectDB(nodo, tipo, modelo, query, function (json) {
+        var cedula = '0';
+        var rango = [];
+        var numeroPrevio;
+        var count = 0;
+        var result = [];
+        var rangoActual = -1
+        var cantidad = json.resultado.length;
+        json.resultado.forEach(record => {
+            if (count == 0) {
+                cedula = record.cedPaciente;
+                rango.push(record.numeroDeDiag);
+            }
+            else if (cedula != record.cedPaciente) {
+                rango.push(rangoActual);
+                result.push({ cedula: cedula, rango: rango });
+                rango = [];
+                cedula = record.cedPaciente;
+                rango.push(record.numeroDeDiag);
+            } else {
+                rangoActual = record.numeroDeDiag;
+            }
+            count++;
+            if (count == cantidad) {
+                rango.push(rangoActual);
+                result.push({ cedula: cedula, rango: rango });
+                rango = [];
+                cedula = record.cedPaciente;
+                rango.push(record.numeroDeDiag);
+                res.send(result)
+            }
+        });
+    });
 }
