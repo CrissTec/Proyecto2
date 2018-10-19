@@ -1,7 +1,11 @@
-Problemas con las fechas: "yyyymmdd" no funciona pues mongo pide formato "yyyy-mm-dd"
+Utilizar las fechas: "yyyymmdd" no funciona pues mongo pide formato "yyyy-mm-dd"
 
 Delete paciente no verifica que este tenga citas asociadas sin cancelar
 
 Delete tratamiento catalogo no verifica que haya diagnosticoscatalogo asignados
+Delete tratamiento catalogo no verifica que haya tratamiento cita asignados
+Delete diagnostico catalogo no verifica que haya diagnostico cita asignados
+**Work around para los 3:  usar un estado activo o eliminado
+
 
 Cambiar como se obitenen los telefonos para evitar [[]]
