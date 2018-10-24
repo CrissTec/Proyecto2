@@ -1,16 +1,58 @@
-<div class="wrapper" ng-init=starPage()>
-    <br><br><br><br><br><br><br><br><br>
-    <div class="col-sm-4 sidenav"></div>
-    <div class="col-sm-3">
-    <form class="form-signin" id="myForm" ng-submit="checkUser()">       
-      <h1 ALIGN="center" class="form-signin-heading">TECHealth Login</h1>
-      <br><br>
-      <input type="text" class="form-control" name="username" placeholder="User" required="" autofocus="" ng-model="user.usr"/>
-      <br><br>
-      <input type="password" class="form-control" name="password" placeholder="Password" required="" ng-model="user.pws"/>      
-      <br><br>
-      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login"/>   
-    </form>
+<div class="login-bg" ng-init=starPage()>
+  <br>
+  <div class="oms-welcome-container">
+        <h1 class="text-center oms-roboto oms-text-shadow">
+            TECHealth - Sistema de salud para usted y toda su familia
+        </h1>
+        <hr class="oms-hr">
+        <h5>
+          <i>Según la definición elaborada por la Organización Mundial de la Salud (OMS), “la salud es un estado completo de
+            bienestar físico, mental y social, y no solamente la ausencia de afecciones o enfermedades” Cuidar nuestra salud
+            debe ser una prioridad durante cualquier etapa de nuestra vida. Esto nos ayudará a tener una calidad de vida
+            excelente en todos los niveles y edades. </i>
+        </h5>
+      </div>
+  <div class="row">
+    <div class="col-sm-8 col-md-8">
+      <div class="oms-welcome oms-welcome-container">
+        <h1 class="text-center oms-text-login-title oms-text-shadow">
+          Su salud y la de su familia es primero
+        </h1>
+        <hr class="oms-hr">
+        <h4>
+          <i> TECHealth es una plataforma en la cual usted podrá actualizar información de sus pacientes,
+            llevando la salud a todas partes del pais. Unase a los miles de doctores que son parte de nuestra
+            plataforma y lleve la salud a sus pacientes. Las ventajas que usted como doctor puede ofrecer a sus
+            pacientes son increibles. Puede mantener consultar el expediente de sus pacientes cuando quiera y
+            donde quiera.
+          </i>
+        </h4>
+      </div>
+    </div>
+    <!-- <div class="col-sm-4 col-md-4"></div> -->
+    <div class="col-sm-4 col-md-4">
+      <form class="oms-signin" id="myForm" ng-submit="checkUser()">
+        <div class="oms-heading">
+          <h1 ALIGN="center" class="form-signin-heading oms-roboto">Ingresar</h1>
+        </div>
+        <div class="oms-body">
+          <input type="text" class="form-control oms-input" name="username" placeholder="User" required="" autofocus="" ng-model="user.usr"
+          />
+          <input type="password" class="form-control oms-input" name="password" placeholder="Password" required="" ng-model="user.pws"
+          />
+          <input class="btn btn-lg btn-primary btn-block oms-buttom" type="submit" value="Login" />
+          <a class="btn btn-lg btn-danger btn-block oms-buttom">Registrarse</a>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="col-sm-4 col-md-4"></div> -->
+    <!-- <div class="col-sm-4 col-md-4"></div> -->
   </div>
-  <div class="col-sm-4 sidenav"></div>	
 </div>
+
+<style>
+ body,
+html {
+  height: 100%;
+}
+</style>
