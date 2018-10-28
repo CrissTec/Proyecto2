@@ -378,15 +378,22 @@ body{
   background-color: #f5f5f5;
 }
 
+.oms-toolbar{
+  padding-bottom: 1px;
+  margin-bottom: 2px;
+  border-bottom: solid 1px;
+  border-bottom-color: #CCCCCC;
+}
+
 .oms-btn-green:link,
-.oms-btn-green:visited {
+.oms-btn-green:visited, .oms-form-group > input.oms-input.green {
   border-bottom-color: #78d124;
   color: #78d124;
   text-decoration: none;
   font-style: normal;
 }
 
-.oms-btn-green:hover {
+.oms-btn-green:hover{
   border-bottom-color: #67ca0a;
   color: #80ff09;
 }
@@ -400,14 +407,14 @@ body{
 
 
 .oms-btn-red:link,
-.oms-btn-red:visited {
+.oms-btn-red:visited, .oms-form-group > input.oms-input.red  {
   border-bottom-color: rgb(209, 36, 36);
   color: rgb(209, 36, 36);
   text-decoration: none;
   font-style: normal;
 }
 
-.oms-btn-red:hover {
+.oms-btn-red:hover{
   border-bottom-color: rgb(255, 43, 43);
   color: rgb(255, 43, 43);
 }
@@ -434,19 +441,19 @@ body{
 
 
 .oms-btn-orange:link,
-.oms-btn-orange:visited {
+.oms-btn-orange:visited , .oms-form-group > input.oms-input.orange {
   border-bottom-color: rgb(255, 192, 17);
   color: rgb(255, 192, 17);
   text-decoration: none;
   font-style: normal;
 }
 
-.oms-btn-orange:hover {
+.oms-btn-orange:hover , .oms-form-group > input.oms-input.orange{
   border-bottom-color: rgb(255, 210, 88);
   color: rgb(255, 210, 88);
 }
 
-.oms-btn-orange:active {
+.oms-btn-orange:active{
   border-bottom-color: rgb(179, 136, 19);
   color: rgb(179, 136, 19);
   background-color: #e5e5e5;
@@ -458,19 +465,19 @@ body{
 
 
 .oms-btn-blue:link,
-.oms-btn-blue:visited {
+.oms-btn-blue:visited , .oms-form-group > input.oms-input.blue{
   border-bottom-color: rgb(17, 128, 255);
   color: rgb(17, 128, 255);
   text-decoration: none;
   font-style: normal;
 }
 
-.oms-btn-blue:hover {
+.oms-btn-blue:hover , .oms-form-group > input.oms-input.blue{
   border-bottom-color: rgb(88, 166, 255);
   color: rgb(88, 166, 255);
 }
 
-.oms-btn-blue:active {
+.oms-btn-blue:active{
   border-bottom-color: rgb(19, 83, 179);
   color: rgb(19, 83, 179);
   background-color: #e5e5e5;
@@ -542,4 +549,33 @@ body{
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+}
+
+
+.oms-form-group > input{
+  display: table-cell;
+  float: left;
+  height: 43px;
+  border-bottom-color: black;
+  border-bottom: solid 3px;
+  z-index: 1;
+  width: 80%;
+}
+
+.oms-form-group > .oms-input-group-btn{
+  position: table-cell;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 0;
+
+}
+.oms-input-group-btn > .oms-btn{
+  display: table-cell;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+
 }
