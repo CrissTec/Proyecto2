@@ -1,0 +1,27 @@
+<div menu></div>
+<div class="container "  ng-init="getAppoiments()" style="padding-top: 80px;">
+
+
+	<h2 ALIGN="center">Citas Registradas</h2>
+
+	<div class="col-sm-2 sidenav"></div>
+	
+		<div class="col-sm-8">
+            		<input type="search"
+             			placeholder="Busca una banda"
+             			ng-model="search"
+             		  
+                         class="form-control"><br>
+            
+                        
+		<ol class="list-group">
+      		<li class="list-group-item" ng-repeat="app in apps | filter:search" >
+       		
+				<a href="#/seeBand/{{band.id}}"><h3>{{app}}</h3></a>
+      
+              </li>
+        </ol>
+			<h4 style="color:#FF0101" ALIGN="center" ng-if="apps.le">NO SE ENCUENTRAN CITAS REGISTRADAS</h4 >
+	</div>
+		<div class="col-sm-2 sidenav"></div>	
+</div>

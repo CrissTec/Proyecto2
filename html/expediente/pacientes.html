@@ -1,0 +1,225 @@
+<div menu>
+    </div>
+    <div class="container">
+        <div class="wrapper"></div>
+        <!-- <div class="oms-roboto oms-h1 oms-light-blue-text">pacientes de atencion</div> -->
+        <div class="oms-roboto oms-h1 oms-red-text">Paciente</div>
+    
+    
+    
+        <!-- Toolbar que sirve para mostrar algunas opciones extras que se pueden ejecutar sobre las lista -->
+    
+    
+        <!-- Lista de elementos a consultar y manipular -->
+    
+        <div class="list-group">
+            <a href="" ng-if="pacientes == null || empty(pacientes)" class="list-group-item disabled">
+                No se ha encontrado ninguna resultado
+            </a>
+            <a href="" ng-repeat="a in pacientes" class="list-group-item" data-toggle="modal" data-target="#basicModal" ng-click="setPaciente(a)">
+                <div class="oms-h3 oms-roboto oms-light-blue-text">
+                    {{a.nombre}}
+                </div>
+                {{a.lugar}}
+            </a>
+        </div>
+    
+    
+        <br>
+    
+    
+        <!-- Modal que muestra la información detallada del elemento a consultar -->
+    
+        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Informacion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="oms-roboto oms-h1">{{paciente.nombre}}</div>
+                        <div class="oms-roboto">Nombre: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.nombre" />
+                        <div class="oms-roboto">Lugar: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.lugar" />
+                        <div class="oms-roboto">Tipo: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.tipo" />
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="oms-btn-group">
+                            <a class="oms-btn oms-btn-red" data-dismiss="modal" data-toggle="modal" data-target="#deleteConfirmModal" href="">
+                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                Remover
+                            </a>
+                            <a class="oms-btn oms-btn-orange" data-dismiss="modal" data-toggle="modal" data-target="#updateConfirmModal" href="">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                Actualizar
+                            </a>
+    
+                            <a class="oms-btn oms-btn-green" data-dismiss="modal" href="">Cerrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <!-- Modal para insertar algun dato-->
+    
+        <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Informacion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="oms-roboto oms h1">{{paciente.nombre}}</div>
+                        <hr>
+                        <div class="oms-roboto">Nombre: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.nombre" />
+                        <div class="oms-roboto">Lugar: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.lugar" />
+                        <div class="oms-roboto">Tipo: </div>
+                        <input class="form-control oms-input" type="text" ng-model="paciente.tipo" />
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="oms-btn-group">
+                            <a class="oms-btn oms-btn-red" data-dismiss="modal" href="">Descartar</a>
+                            <a class="oms-btn oms-btn-green" data-dismiss="modal" href="">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                Crear
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+        <!-- Modal para confirmar si se desea eliminar algun dato-->
+    
+        <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Alerta!</h4>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea continuar con la accion?
+                    </div>
+                    <div class="modal-footer">
+                        <div class="oms-btn-group">
+                            <a ng-click="removePaciente()" class="oms-btn oms-btn-red" data-dismiss="modal" href="">Si</a>
+                            <a class="oms-btn oms-btn-green" data-dismiss="modal" href="">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                No
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <!-- Modal para confirmar si se desea actualizar algun dato-->
+    
+    
+        <div class="modal fade" id="updateConfirmModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Alerta!</h4>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea continuar con la accion?
+                    </div>
+                    <div class="modal-footer">
+                        <div class="oms-btn-group">
+                            <a ng-click="updatePaciente()" class="oms-btn oms-btn-red" data-dismiss="modal" href="">Si</a>
+                            <a class="oms-btn oms-btn-green" data-dismiss="modal" href="">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                No
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    </div>
+    
+    
+    <style>
+        html,
+        body {
+            background-color: #DDDDDD;
+            min-height: 100%;
+            height: 100%;
+        }
+    
+        /* .oms-form-group{
+            position: relative;
+            display: table;
+            border-collapse: separate;
+        } */
+    
+        .oms-form-group > input{
+            display: table-cell;
+            float: left;
+            height: 43px;
+            border-bottom-color: black;
+            border-bottom: solid 3px;
+            z-index: 1;
+            width: 80%;
+        }
+    
+        .oms-form-group > .oms-input-group-btn{
+            position: table-cell;
+            white-space: nowrap;
+            vertical-align: middle;
+            font-size: 0;
+    
+        }
+        .oms-input-group-btn > .oms-btn{
+            display: table-cell;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+    
+        }
+    
+        
+    
+    </style>
+    
+    <script>
+        $("a.rename").click(function (e) {
+            alert("calling the four giants");
+            e.preventDefault();
+            var $this = $(this);
+            var fileName = $(this).data("file");
+            $("#basicModal").data("fileName", fileName).modal("toggle", $this);
+    
+        });
+    
+        $("#basicModal").on("shown.bs.modal", function (e) {
+            //data-fileName attribute associated with the modal added in the click event of the button
+            // alert($(this).data("fileName"));
+            // //my data-file associated with the button 
+            // alert($(e.relatedTarget).data("file"));
+        })
+    
+    
+    </script>

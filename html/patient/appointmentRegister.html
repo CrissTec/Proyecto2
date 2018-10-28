@@ -1,0 +1,63 @@
+<div menu></div>
+<div class="container" style="padding-top: 80px;" >
+<h1 ALIGN="center">Sacar cita</h1><br>
+  <div class="row">
+      <div class="col-md-3 col-sm-5 col-xs-12"><br><br></div>
+    <div class="col-md-6 col-sm-12 col-xs-12 personal-info">
+      <form class="form-horizontal" id="registro" role="form" ng-submit="register()">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Id:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="appointmentData.id" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Área de especialidad:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="appointmentData.especialidad" type="text">
+          </div>
+        </div>	
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Fecha:</label>
+              <div class="col-lg-8">
+                <label>
+                  <input ng-model="appointmentData.date" type="date"/>
+                </label>  
+            </div>
+          </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Hora:</label>
+            <div class="col-md-8">
+              <input class="form-control" ng-model="appointmentData.hora" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Observación adicional:</label>
+            <div class="col-md-8">
+              <input class="form-control" ng-model="appointmentData.observacion" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Estado:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="appointmentData.estado" type="text">
+          </div>
+        </div>      
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Cédula del paciente:</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="appointmentData.cedula" type="text">
+          </div>
+        </div>		                       				
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" value="Sacar cita" type="submit">
+            <span></span>
+            <input class="btn btn-default" value="Reestablecer" ng-click="resetData()" type="reset">
+          </div>
+        </div>	  
+      </form>
+    </div>
+  </div>  
+</div>
