@@ -62,7 +62,7 @@ exports.readPacienteById = function(req, res){
 //Obtiene un paciente por la cedula
 exports.readPacienteByCedula = function(req, res){
     var tipo = "findOne";
-    var query = {cedula: req.params.cedula};
+    var query = {cedula: req.params.ced};
     var modelo = Paciente;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){
