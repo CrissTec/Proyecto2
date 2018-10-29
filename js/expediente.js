@@ -19,7 +19,7 @@ app.config(function($routeProvider) {
         controller : 'expedienteController'
     })
     .when("/expediente/cita/all", {
-        templateUrl : "./../html/expediente/citas.html",
+        templateUrl : "./../html/citas/home.html",
         controller : 'expedienteController'
     })
     });

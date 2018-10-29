@@ -6,10 +6,6 @@ app.config(function($routeProvider) {
         templateUrl : "./../html/administrator/home.html",
         controller : 'adminController'
     })
-    .when("/administrator/centroatencion", {
-        templateUrl : "./../html/administrator/centroatencion.html",
-        controller : 'adminController'
-    })
     .when("/administrator/funcionario", {
         templateUrl : "./../html/administrator/funcionario.html",
         controller : 'adminController'
@@ -30,18 +26,6 @@ app.controller('adminController', function($scope){
         
     };
     
-    $scope.centros = [
-            {id: 1,nombre: "Centro1", lugar: "San Jose", tipo:"Ebais"},
-            {id: 2,nombre: "Centro2", lugar: "Heredia", tipo:"Hospital"},
-            {id: 3,nombre: "Centro3", lugar: "Alajuela", tipo:"Clinica"},
-            {id: 4,nombre: "Centro4", lugar: "Cartago", tipo:"Hospital"},
-            {id: 5,nombre: "Centro5", lugar: "Puntarenas", tipo:"Psiquiatrico"},
-            {id: 6,nombre: "Centro6", lugar: "Puntarenas", tipo:"Psiquiatrico"},
-            {id: 7,nombre: "Centro7", lugar: "Puntarenas", tipo:"Psiquiatrico"},
-            {id: 8,nombre: "Centro8", lugar: "Puntarenas", tipo:"Psiquiatrico"},
-            {id: 9,nombre: "Centro9", lugar: "Puntarenas", tipo:"Psiquiatrico"}
-    ];
-
     $scope.tratamientos = [
         {id: 1,nombre: "Tratamiento1", lugar: "San Jose", tipo:"Ebais"},
         {id: 2,nombre: "Tratamiento2", lugar: "Heredia", tipo:"Hospital"},
@@ -65,8 +49,7 @@ app.controller('adminController', function($scope){
     ];
 
 
-    $scope.centro = $scope.centros[0];
-    $scope.centronuevo = {id: 1, nombre: "", lugar: "", tipo:""};
+    
 
     $scope.tratamiento = $scope.tratamientos[0];
     $scope.tratamientonuevo = {id: 1, nombre: "", lugar: "", tipo:""};
