@@ -63,7 +63,7 @@ exports.readfuncionarioByCedula = function (req, res) {
 //Actualiza un funcionario
 exports.updatefuncionario = function (req, res) {
     var tipo = "findOneAndUpdate";
-    var query = { cedula: req.params.ced, set: { $set: req.body } };
+    var query = { id: {cedula: req.params.ced}, set: { $set: req.body } };
     var modelo = Funcionario;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {

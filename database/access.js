@@ -59,7 +59,7 @@ ConnectDB = function (nodo, tipo, modelo, query, callback) {
     }
 
     else if (tipo == "findOneAndUpdate") {
-        modelo.findByIdAndUpdate(query.id, query.set, function (err, updated) {
+        modelo.findOneAndUpdate(query.id, query.set, function (err, updated) {
             if (err) {
                 callback({ status: false, error: 'Error en la actualización', err: -1 })
             } else {
@@ -69,7 +69,7 @@ ConnectDB = function (nodo, tipo, modelo, query, callback) {
     }
 
     else if (tipo == "findOneAndDelete") {
-        modelo.findByIdAndDelete(query, function (err, deleted) {
+        modelo.findOneAndDelete(query, function (err, deleted) {
             if (err) {
                 callback({ status: false, error: 'Error en el borrado', err: -1 })
             } else {
