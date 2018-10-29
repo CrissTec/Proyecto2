@@ -83,14 +83,17 @@ app.directive('menu', function() {
 app.service('connectApi',function($http){
 	//implementacion del gttp.get
 	this.httpGet= function(method){
+        console.log("connectApi get!");
 		var getPromise=$http.get(SERVER_IP+method).then(function (response){
-	    	return angular.fromJson(response);
+            console.log(response);
+	    	return response;
 		});
 		return getPromise;
     },
     
     this.httpGetR= function(method,requestJson){
 		var getPromise=$http.get(SERVER_IP+method, JSON.stringify(requestJson)).then(function (response){
+            console.log(response);
 	    	return angular.fromJson(response);
 		});
 		return getPromise;
@@ -98,6 +101,25 @@ app.service('connectApi',function($http){
 	//implementacion del http.post
 	this.httpPost= function(method,requestJson){
 		var postPromise=$http.post(SERVER_IP+method, JSON.stringify(requestJson)).then(function(response) {
+            console.log(response);
+	  		return angular.fromJson(response);
+       	});
+		return postPromise;
+    }
+    
+    //implementacion del http.post
+	this.httpPut= function(method,requestJson){
+		var postPromise=$http.put(SERVER_IP+method, JSON.stringify(requestJson)).then(function(response) {
+            console.log(response);
+	  		return angular.fromJson(response);
+       	});
+		return postPromise;
+    }
+    
+
+    //implementacion del http.post
+	this.httpDelete= function(method){
+		var postPromise=$http.delete(SERVER_IP+method).then(function(response) {
             console.log(response);
 	  		return angular.fromJson(response);
        	});
