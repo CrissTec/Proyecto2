@@ -8,11 +8,22 @@ app.config(function($routeProvider) {
     })
     .when("/patientRegister", {
         templateUrl : "./../html/patient/register.html",
-        controller : 'registerCtrl'
-    })
+        controller : 'patientRegisterCtrl'
+
+
 });
 
-app.controller('registerCtrl', function($scope){
+app.controller('patientRegisterCtrl', function($scope){
+    $scope.patientData = {};
+    $scope.register = function(){
+        console.log($scope.patientData)
+
+    };
+})
+
+
+
+app.controller('patientReportCtrl', function($scope){
     $scope.patientData = {};
     $scope.register = function(){
         console.log($scope.patientData)

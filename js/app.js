@@ -21,23 +21,35 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
     };
 
     $scope.checkUser =  function(){//verificacion de la existencia de un usuario	
-        //metod de http angular
-        //connectApi.httpGet(method,msj).then(function(answer) {});
+
+        //connectApi.httpGet(method,msj).then(function(answer) {
+            //localStorage.setItem('userName', $scope.user.usr);
+		    //localStorage.setItem('userId', answer[0].id);
+            //localStorage.setItem('userRol', answer[0].rolID);
+        //});
+
         console.log($scope.user);
         $location.url("main");
+
 
     };
 })
 
 
 app.controller('menuCtrl',function($scope,$location){
+    let rol = localStorage.getItem('userRol');
+    $scope.userName=localStorage.getItem('userName');
+	$scope.patient=false;
+    $scope.doctor=false;
+    $scope.doctor=false;
+    $scope.admi=false;
 
 
-})
-
-
-
-app.controller('menu2Ctrl',function($scope,$location){
+    $scope.logOut=function(){//cierra sesion y se hacegura de borrar el cache de los datos del usuario
+		localStorage.clear();
+		localStorage= null;
+        $location.url('login');
+    };
 
 
 })
@@ -55,17 +67,17 @@ app.directive('menu', function() {
 //sevice que sobrecarga http con el fin de hacerlo accesible desde todos los comtroladores
 app.service('connectApi',function($http){
 	//implementacion del gttp.get
-	this.httpGet= function(method,requestJson){
-		var getPromise=$http.get(webSeviceIp + method+'?frase='+JSON.stringify(requestJson)).then(function (response){
-	    	return angular.fromJson(response.data.substring(73, response.data.length - 9));
+	this.httpGet= function(method){
+		var getPromise=$http.get(webSeviceIp + method).then(function (response){
+	    	return angular.fromJson(response);
 		});
 		return getPromise;
 	},
 	//implementacion del http.post
-	this.httpPost= function(method,requestJson){
-		var postPromise=$http.post(webSeviceIp+method, {frase:JSON.stringify(requestJson)}).then(function(response) {
+	this.httpPost= function(requestJson){
+		var postPromise=$http.post(webSeviceIp, {frase:JSON.stringify(requestJson)}).then(function(response) {
             console.log(response);
-	  		return angular.fromJson(response.data.d);
+	  		return angular.fromJson(response);
        	});
 		return postPromise;
 	}

@@ -9,7 +9,7 @@ app.config(function($routeProvider) {
 });
 
 
-app.controller('appointmentRegister', function($scope){
+app.controller('appointmentRegister', function($scope,connectApi){
     $scope.appointmentData = {};
     $scope.appointmentRegister = function(){
         console.log($scope.appointmentData)
