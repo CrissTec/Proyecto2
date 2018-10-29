@@ -16,18 +16,6 @@ app.config(function($routeProvider) {
 
 
 app.controller('loginCtrl', function($scope,$location,connectApi){
-    connectApi.httpPost("login/signin",{username:"crisferlop1",password:"12345"})
-    .then(function(data){
-        console.log(data);    
-    });
-
-    connectApi.httpPost("login/1/login",{usuario:"crisferlop1",password:"12345"})
-    .then(function(data){
-        console.log(data);    
-    });
-    
-    console.log("login");
-
     $scope.user={};
 	$scope.starPage=function(){//condiciones iniciales
         localStorage.clear();
@@ -36,12 +24,11 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
     };
 
     $scope.checkUser =  function(){//verificacion de la existencia de un usuario	
-
-        //connectApi.httpGet(method,msj).then(function(answer) {
-            //localStorage.setItem('userName', $scope.user.usr);
-		    //localStorage.setItem('userId', answer[0].id);
-            //localStorage.setItem('userRol', answer[0].rolID);
-        //});
+        connectApi.httpPost("login/signin",{username: $scope.user.usr,password:$scope.user.pws}).then(function(data){
+            localStorage.setItem('userName', $scope.user.usr);
+		    localStorage.setItem('userId', data.cedula);
+            localStorage.setItem('userRol', data.tipo);
+        });
 
         console.log($scope.user);
         $location.url("main");
@@ -52,12 +39,24 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
 
 
 app.controller('menuCtrl',function($scope,$location){
-    let rol = localStorage.getItem('userRol');
     $scope.userName=localStorage.getItem('userName');
 	$scope.patient=false;
     $scope.doctor=false;
-    $scope.doctor=false;
+    $scope.secre=false;
     $scope.admi=false;
+
+
+    $scope.checkRol=function(){
+        $scope.userName=localStorage.getItem('userName');
+        console.log( $scope.userName)
+        let rol = localStorage.getItem('userRol');
+
+        if (rol=="patient") {$scope.patient=true;$scope.doctor=false;$scope.secre=false;$scope.admi=false;}
+        else if (rol=="doctor") {$scope.patient=false;$scope.doctor=true;$scope.secre=false;$scope.admi=false;}
+        else if (rol=="secretary") {$scope.patient=false;$scope.doctor=false;$scope.secre=true;$scope.admi=false;}
+        else if (rol=="admi") {$scope.patient=false;$scope.doctor=false;$scope.secre=false;$scope.admi=true;}
+        else {$scope.patient=false;$scope.doctor=false;$scope.secre=false;$scope.admi=false;}
+    };
 
 
     $scope.logOut=function(){//cierra sesion y se hacegura de borrar el cache de los datos del usuario
@@ -77,15 +76,13 @@ app.directive('menu', function() {
    };
 })
 
+
 /////////// hay que corregir la que el mae hace con las respueestas despues de jalarlas , pero este es el get y el post basico 
 
 //sevice que sobrecarga http con el fin de hacerlo accesible desde todos los comtroladores
 app.service('connectApi',function($http){
 	//implementacion del gttp.get
 	this.httpGet= function(method){
-<<<<<<< HEAD
-		var getPromise=$http.get(webSeviceIp + method).then(function (response){
-=======
 		var getPromise=$http.get(SERVER_IP+method).then(function (response){
 	    	return angular.fromJson(response);
 		});
@@ -94,22 +91,17 @@ app.service('connectApi',function($http){
     
     this.httpGetR= function(method,requestJson){
 		var getPromise=$http.get(SERVER_IP+method, JSON.stringify(requestJson)).then(function (response){
->>>>>>> 9c340115b573bdc2abb822c3ffaa559f31db0760
 	    	return angular.fromJson(response);
 		});
 		return getPromise;
 	},
 	//implementacion del http.post
-<<<<<<< HEAD
-	this.httpPost= function(requestJson){
-		var postPromise=$http.post(webSeviceIp, {frase:JSON.stringify(requestJson)}).then(function(response) {
-=======
 	this.httpPost= function(method,requestJson){
 		var postPromise=$http.post(SERVER_IP+method, JSON.stringify(requestJson)).then(function(response) {
->>>>>>> 9c340115b573bdc2abb822c3ffaa559f31db0760
             console.log(response);
 	  		return angular.fromJson(response);
        	});
 		return postPromise;
 	}
 })
+
