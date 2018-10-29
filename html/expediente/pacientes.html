@@ -6,6 +6,32 @@
         <div class="oms-roboto oms-h1 oms-red-text">Paciente</div>
     
     
+
+        <div class="row oms-toolbar">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="oms-form-group">
+                        <input class="form-control oms-input green" placeholder="buscar paciente" type="text" />
+                        <span class="oms-input-group-btn">
+                            <a href="" class="oms-btn oms-btn-green">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                Buscar
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <div class="pull-right oms-btn-group">
+                        <a data-toggle="modal" data-target="#insertModal" ng-click="pacienteNuevo()" class="oms-btn oms-btn-green" href="">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Agregar
+                        </a>
+                        <a href="#/expediente/paciente/all"  class="oms-btn oms-btn-blue" href="">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            Consultar todos
+                        </a>
+                    </div>
+                </div>
+            </div>
     
         <!-- Toolbar que sirve para mostrar algunas opciones extras que se pueden ejecutar sobre las lista -->
     
@@ -13,7 +39,7 @@
         <!-- Lista de elementos a consultar y manipular -->
     
         <div class="list-group">
-            <a href="" ng-if="pacientes == null || empty(pacientes)" class="list-group-item disabled">
+            <a href="" ng-if="pacientes == null || pacientes.length == 0" class="list-group-item disabled">
                 No se ha encontrado ninguna resultado
             </a>
             <a href="" ng-repeat="a in pacientes" class="list-group-item" data-toggle="modal" data-target="#basicModal" ng-click="setPaciente(a)">

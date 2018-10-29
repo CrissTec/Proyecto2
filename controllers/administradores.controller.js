@@ -129,7 +129,7 @@ exports.readcentroDeAtencionByCodigo = function (req, res) {
 //Actualiza un centroDeAtencion
 exports.updatecentroDeAtencion = function (req, res) {
     var tipo = "findOneAndUpdate";
-    var query = { codigo: req.params.cod, set: { $set: req.body } };
+    var query = { id:{codigo: req.params.cod}, set: { $set: req.body } };
     var modelo = CentroDeAtencion;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {
@@ -143,7 +143,8 @@ exports.deletecentroDeAtencion = function (req, res) {
     var tipo = "findOneAndDelete";
     var query = { codigo: req.params.cod }
     var modelo = CentroDeAtencion;
-    var nodo = req.params.nodo
+    var nodo = req.params.nodo;
+    console.log(query);
     ConnectDB(nodo, tipo, modelo, query, function (json) {
         res.send(json)
     });
@@ -195,7 +196,7 @@ exports.readdiagnosticoCatalogoById = function (req, res) {
 //Actualiza un diagnosticoCatalogo
 exports.updatediagnosticoCatalogo = function (req, res) {
     var tipo = "findOneAndUpdate";
-    var query = { id: req.params.id, set: { $set: req.body } };
+    var query = { id: {id: req.params.id}, set: { $set: req.body } };
     var modelo = DiagnosticoCatalogo;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {
@@ -227,7 +228,16 @@ exports.createtratamientoCatalogo = function (req, res) {
         monto: req.body.monto
     });
     var tipo = "save"
-    var query = {};
+    var query = {
+        id: req.body.id,
+        nombre: req.body.nombre,
+        tipo: req.body.tipo,
+        dosis: req.body.dosis,
+        monto: req.body.monto
+    };
+
+    console.log(query);
+
     var modelo = tratamientoCatalogo
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {
@@ -260,7 +270,7 @@ exports.readtratamientoCatalogoById = function (req, res) {
 //Actualiza un tratamientoCatalogo
 exports.updatetratamientoCatalogo = function (req, res) {
     var tipo = "findOneAndUpdate";
-    var query = { id: req.params.id, set: { $set: req.body } };
+    var query = { id: {id: req.params.id}, set: { $set: req.body } };
     var modelo = TratamientoCatalogo;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {

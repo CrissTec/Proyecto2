@@ -25,49 +25,76 @@ app.config(function($routeProvider) {
     });
 
 
-app.controller('expedienteController', function($scope){
+app.controller('expedienteController', function($scope,connectApi){
 
 
-    $scope.pacientes = [
-        {id: 1,nombre: "Paciente1", lugar: "San Jose", tipo:"Ebais"},
-        {id: 2,nombre: "Paciente2", lugar: "Heredia", tipo:"Hospital"},
-        {id: 3,nombre: "Paciente3", lugar: "Alajuela", tipo:"Clinica"},
-        {id: 4,nombre: "Paciente4", lugar: "Cartago", tipo:"Hospital"},
-    ];
 
+
+    $scope.pacientes = [];
+
+    $scope.pacientenuevo =  { nombre: "", apellido : "", cedula: "", 
+        fechaNacimiento: "", tipoDeSangre: "", nacionalidad: "", 
+        lugarDeResidencia: "", telefono: "", username: "", password: ""
+    };
     
-    $scope.paciente = $scope.pacientes[0];
-    $scope.pacientenuevo = {id: 1, nombre: "", lugar: "", tipo:""};
+    $scope.paciente = $scope.paciente = Object.assign({}, $scope.pacientenuevo);
 
+
+
+    $scope.getAllPacientes = function(){
+        console.log("calling: " + SERVER_IP + 'paciente/1/readpaciente/');
+        connectApi.httpGet('paciente/1/readtratamientoCatalogo/')
+        .then(function(data){
+            console.log(data);
+            console.log(data.data != null && data.data != undefined && data.data.status);
+            if (data.data != null && data.data != undefined && data.data.status){
+                $scope.pecientes = data.data.resultado;
+            }
+        });
+    }
+
+
+    $scope.getAllPacientes();
+
+    $scope.addPaciente = function(){
+        connectApi.httpPost("paciente/1/createpaciente",$scope.paciente)
+        .then(function(data){
+            $scope.getAllPacientes();
+        });
+        $scope.paciente = Object.assign({}, $scope.pacientenuevo);
+    }
+    
+
+
+
+    $scope.hideTask = function(){
+        $scope.completedTask = false;
+    }
 
 
     $scope.setPaciente = function(e){
-        // $scope.centro = e;
-        $scope.paciente = {id:e.id,nombre: e.nombre, lugar: e.lugar, tipo: e.tipo};
+        $scope.paciente = Object.assign({}, e);
     };
     $scope.pacienteNuevo = function(){
-        $scope.paciente = $scope.pacientenuevo;
+        $scope.paciente = Object.assign({}, $scope.pacientenuevo);
     };
 
     $scope.updatePaciente = function(){
-        for(var i = 0; i < $scope.pacientes.length;i++){
-            if ($scope.pacientes[i].id == $scope.paciente.id){
-                $scope.pacientes[i]= $scope.paciente;
-                break;
-            }
-        }
-        $scope.paciente = {id:0,nombre: "", lugar: "", tipo:""};
+        connectApi.httpPut("paciente/1/"+$scope.paciente.ced+"/updatepaciente",$scope.paciente)
+        .then(function(data){
+            $scope.getAllPacientes();
+        });
+
+        $scope.pacienteNuevo();
+
     }
 
     $scope.removePaciente = function(){
-        for(var i = 0; i < $scope.pacientes.length;i++){
-            if ($scope.pacientes[i].id == $scope.paciente.id){
-                $scope.pacientes.splice(i,1);
-                $scope.completedTask=true;
-                break;
-            }
-        }
-        $scope.paciente = {id:0,nombre: "", lugar: "", tipo:""};
+        connectApi.httpDelete("paciente/1/"+$scope.paciente.ced+"/deletepaciente",$scope.paciente)
+        .then(function(data){
+            $scope.getAllPacientes();
+        });
+        $scope.pacienteNuevo();
     }
 
 

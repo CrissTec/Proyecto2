@@ -9,21 +9,39 @@ app.config(function($routeProvider) {
 });
 
 
-app.controller('tratamientoController', function($scope){
+app.controller('tratamientoController', function($scope,connectApi){
     
-    $scope.tratamientos = [
-        {id: 1,nombre: "Tratamiento1", lugar: "San Jose", tipo:"Ebais"},
-        {id: 2,nombre: "Tratamiento2", lugar: "Heredia", tipo:"Hospital"},
-        {id: 3,nombre: "Tratamiento3", lugar: "Alajuela", tipo:"Clinica"},
-        {id: 4,nombre: "Tratamiento4", lugar: "Cartago", tipo:"Hospital"},
-    ];
+    $scope.tratamientos = [];
 
 
+
+    //{id: "T123", nombre: "Cura contra el SIDA", tipo: "Placebo", dosis: "5", monto: "5"}
+    $scope.tratamientonuevo = {id: "", nombre: "", tipo: "", dosis: "", monto: ""};
+    $scope.tratamiento = Object.assign({}, $scope.tratamientonuevo);
+
+    $scope.getAllTratamientos = function(){
+        console.log("calling: " + SERVER_IP + 'administrador/1/readtratamientoCatalogo/');
+        connectApi.httpGet('administrador/1/readtratamientoCatalogo/')
+        .then(function(data){
+            console.log(data);
+            console.log(data.data != null && data.data != undefined && data.data.status);
+            if (data.data != null && data.data != undefined && data.data.status){
+                $scope.tratamientos = data.data.resultado;
+            }
+        });
+    }
+
+
+    $scope.getAllTratamientos();
+
+    $scope.addTratamiento = function(){
+        connectApi.httpPost("administrador/1/createtratamientoCatalogo",$scope.tratamiento)
+        .then(function(data){
+            $scope.getAllTratamientos();
+        });
+        $scope.tratamiento = Object.assign({}, $scope.tratamientonuevo);
+    }
     
-
-    $scope.tratamiento = $scope.tratamientos[0];
-    $scope.tratamientonuevo = {id: 1, nombre: "", lugar: "", tipo:""};
-
 
 
 
@@ -36,32 +54,28 @@ app.controller('tratamientoController', function($scope){
 
     $scope.setTratamiento = function(e){
         // $scope.centro = e;
-        $scope.tratamiento = {id:e.id,nombre: e.nombre, lugar: e.lugar, tipo: e.tipo};
+        $scope.tratamiento = Object.assign({}, e);
     };
     $scope.tratamientoNuevo = function(){
-        $scope.tratamiento = $scope.tratamientonuevo;
+        $scope.tratamiento = Object.assign({}, $scope.tratamientonuevo);
     };
 
     $scope.updateTratamiento = function(){
-        for(var i = 0; i < $scope.tratamientos.length;i++){
-            if ($scope.tratamientos[i].id == $scope.tratamiento.id){
-                $scope.tratamientos[i]= $scope.tratamiento;
-                break;
-            }
-        }
-        $scope.tratamiento = {id:0,nombre: "", lugar: "", tipo:""};
+        connectApi.httpPut("administrador/1/"+$scope.tratamiento.id+"/updatetratamientoCatalogo",$scope.tratamiento)
+        .then(function(data){
+            $scope.getAllTratamientos();
+        });
+
+        $scope.tratamientoNuevo();
     }
 
     $scope.removeTratamiento = function(){
-        console.log("removing");
-        for(var i = 0; i < $scope.tratamientos.length;i++){
-            if ($scope.tratamientos[i].id == $scope.tratamiento.id){
-                $scope.tratamientos.splice(i,1);
-                $scope.completedTask=true;
-                break;
-            }
-        }
-        $scope.tratamiento = {id:0,nombre: "", lugar: "", tipo:""};
+
+        connectApi.httpDelete("administrador/1/"+$scope.tratamiento.id+"/deletetratamientoCatalogo",$scope.tratamiento)
+        .then(function(data){
+            $scope.getAllTratamientos();
+        });
+        $scope.tratamientoNuevo();
     }
 
 
