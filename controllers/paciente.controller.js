@@ -32,6 +32,8 @@ exports.createPaciente = function(req, res){
             ConnectDB(nodo, tipo, modelo, query, function(json){
                 res.send(json)
             })
+        }else{
+            res.send(json);
         }
     });
 
