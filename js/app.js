@@ -1,5 +1,8 @@
 var app = angular.module("B2", ["ngRoute"]);
 
+const SERVER_IP = "http://localhost:3000/";
+
+
 app.config(function($routeProvider) {
     $routeProvider
     .when("/login", {
@@ -13,6 +16,18 @@ app.config(function($routeProvider) {
 
 
 app.controller('loginCtrl', function($scope,$location,connectApi){
+    connectApi.httpPost("login/signin",{username:"crisferlop1",password:"12345"})
+    .then(function(data){
+        console.log(data);    
+    });
+
+    connectApi.httpPost("login/1/login",{usuario:"crisferlop1",password:"12345"})
+    .then(function(data){
+        console.log(data);    
+    });
+    
+    console.log("login");
+
     $scope.user={};
 	$scope.starPage=function(){//condiciones iniciales
         localStorage.clear();
@@ -68,14 +83,30 @@ app.directive('menu', function() {
 app.service('connectApi',function($http){
 	//implementacion del gttp.get
 	this.httpGet= function(method){
+<<<<<<< HEAD
 		var getPromise=$http.get(webSeviceIp + method).then(function (response){
+=======
+		var getPromise=$http.get(SERVER_IP+method).then(function (response){
+	    	return angular.fromJson(response);
+		});
+		return getPromise;
+    },
+    
+    this.httpGetR= function(method,requestJson){
+		var getPromise=$http.get(SERVER_IP+method, JSON.stringify(requestJson)).then(function (response){
+>>>>>>> 9c340115b573bdc2abb822c3ffaa559f31db0760
 	    	return angular.fromJson(response);
 		});
 		return getPromise;
 	},
 	//implementacion del http.post
+<<<<<<< HEAD
 	this.httpPost= function(requestJson){
 		var postPromise=$http.post(webSeviceIp, {frase:JSON.stringify(requestJson)}).then(function(response) {
+=======
+	this.httpPost= function(method,requestJson){
+		var postPromise=$http.post(SERVER_IP+method, JSON.stringify(requestJson)).then(function(response) {
+>>>>>>> 9c340115b573bdc2abb822c3ffaa559f31db0760
             console.log(response);
 	  		return angular.fromJson(response);
        	});
