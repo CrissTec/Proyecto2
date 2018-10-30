@@ -24,16 +24,22 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
     };
 
     $scope.checkUser =  function(){//verificacion de la existencia de un usuario	
-        connectApi.httpPost("login/signin",{username: $scope.user.usr,password:$scope.user.pws}).then(function(data){
-            localStorage.setItem('userName', $scope.user.usr);
-		    localStorage.setItem('userId', data.cedula);
-            localStorage.setItem('userRol', data.tipo);
+        connectApi.httpPost("login/1/login",{username: $scope.user.usr,password:$scope.user.pws}).then(function(data){
+            if (!data.result){
+                localStorage.setItem('userName', $scope.user.usr);
+		        localStorage.setItem('userId', data.result.cedula);
+                localStorage.setItem('userRol', data.result.tipo);
+                if (data.result.tipo=="patient") {$location.url("expediente/cita-paciente");}
+                else if (data.result.tipo=="doctor") {$location.url("expediente/cita-doctor");}
+                else if (data.result.tipo=="secretary") {$location.url("expediente/cita-secre");}
+                else if (data.result.tipo=="admi") {$location.url("administrator");}
+            }
+            else {
+                localStorage.setItem('userName', $scope.user.usr);
+                alert("datos erroneos");
+                $location.url("main");
+            }    
         });
-
-        console.log($scope.user);
-        $location.url("main");
-
-
     };
 })
 

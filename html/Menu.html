@@ -15,20 +15,23 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-nav-oms">
-        <li>
+        <li ng-if="!patient&&!doctor&&!secre!&&!admi">
           <a href="#/login">Regresar</a>
         </li>
-        <li>
-          <a href="#/main">Inicio</a>
+        <li ng-if="patient">
+          <a href="#/expediente/cita-paciente">Citas</a>
         </li>
-        <li>
+        <li ng-if="doctor">
+          <a href="#/expediente/cita-doctor">Citas</a>
+        </li>
+        <li ng-if="secre">
+          <a href="#/expediente/cita-secre">Citas</a>
+        </li>
+        <li ng-if="admi">
           <a href="#/administrator">Administrar</a>
         </li>
         <li>
           <a href="#/expediente">Expediente</a>
-        </li>
-        <li>
-          <a href="#/catalogue">Catalogo</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
