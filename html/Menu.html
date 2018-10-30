@@ -15,7 +15,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-nav-oms">
-        <li ng-if="!patient&&!doctor&&!secre!&&!admi">
+        <li ng-if="!patient&&!doctor&&!secre&&!admi">
           <a href="#/login">Regresar</a>
         </li>
         <li ng-if="patient">
@@ -34,7 +34,7 @@
           <a href="#/expediente">Expediente</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul ng-if="patient||doctor||secre||admi" class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">{{userName}}
             <span class="caret"></span>
