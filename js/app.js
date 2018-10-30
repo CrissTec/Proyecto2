@@ -18,26 +18,25 @@ app.config(function($routeProvider) {
 app.controller('loginCtrl', function($scope,$location,connectApi){
     $scope.user={};
 	$scope.starPage=function(){//condiciones iniciales
-        localStorage.clear();
 		localStorage= null;
         document.getElementById('myForm').clear;                        
     };
 
     $scope.checkUser =  function(){//verificacion de la existencia de un usuario	
         connectApi.httpPost("login/1/login",{username: $scope.user.usr,password:$scope.user.pws}).then(function(data){
-            if (!data.result){
-                localStorage.setItem('userName', $scope.user.usr);
-		        localStorage.setItem('userId', data.result.cedula);
-                localStorage.setItem('userRol', data.result.tipo);
-                if (data.result.tipo=="patient") {$location.url("expediente/cita-paciente");}
-                else if (data.result.tipo=="doctor") {$location.url("expediente/cita-doctor");}
-                else if (data.result.tipo=="secretary") {$location.url("expediente/cita-secre");}
-                else if (data.result.tipo=="admi") {$location.url("administrator");}
+            console.log(data.data.resultado)
+            if (data.data.resultado==null){
+                alert("datos erroneos");
+                $location.url("main");
             }
             else {
                 localStorage.setItem('userName', $scope.user.usr);
-                alert("datos erroneos");
-                $location.url("main");
+		        localStorage.setItem('userId', data.data.resultado.cedula);
+                localStorage.setItem('userRol', data.data.resultado.tipo);
+                if (data.resultado.tipo=="patient") {$location.url("expediente/cita-paciente");}
+                else if (data.resultado.tipo=="doctor") {$location.url("expediente/cita-doctor");}
+                else if (data.resultado.tipo=="secretary") {$location.url("expediente/cita-secre");}
+                else if (data.resultado.tipo=="admi") {$location.url("administrator");}
             }    
         });
     };
