@@ -52,7 +52,7 @@ exports.cancelarCitaPaciente = function (req, res) {
 exports.reportCitaPaciente = function (req, res) {
     var tipo = "populate";
     var ced = req.params.ced;
-    var constraints = { cedPaciente: req.params.ced } //query 
+    var constraints = { cedPaciente: req.params.ced , estado: "Registrada" } //query 
     var query = { id: constraints, cantidad: 2, populate: { one: 'diagnosticos', two: 'tratamientos' } };
     var modelo = Cita;
     var nodo = req.params.nodo;
@@ -196,7 +196,7 @@ exports.reasignarCita = function (req, res) {
 //report de citas secretaria
 exports.reportCitaDoctor = function (req, res) {
     var tipo = "populate";
-    var constraints = {} 
+    var constraints = { estado: "Registrada" }; 
     var query = { id: constraints, cantidad: 2, populate: { one: 'diagnosticos', two: 'tratamientos' } };
     var modelo = Cita;
     var nodo = req.params.nodo;
