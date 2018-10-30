@@ -184,7 +184,7 @@ exports.reportCitaSecretaria = function (req, res) {
 //asignar citas cancelada por un funcionario
 exports.reasignarCita = function (req, res) {
     var tipo = "findOneAndUpdate";
-    var query = { id: req.params.id, set: { fecha: req.params.fecha } };
+    var query = { id: {_id: req.params.id}, set: {$set: { fecha: req.params.fecha }} };
     var modelo = Cita;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {
