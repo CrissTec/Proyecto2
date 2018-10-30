@@ -15,7 +15,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-nav-oms">
-        <li ng-if="!patient&&!doctor&&!secre&&!admi">
+        <li ng-if="!(patient&&doctor&&secre&&admi)">
           <a href="#/login">Regresar</a>
         </li>
         <li ng-if="patient">

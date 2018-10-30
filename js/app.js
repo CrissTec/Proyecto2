@@ -26,7 +26,6 @@ app.controller('loginCtrl', function($scope,$location,connectApi){
         connectApi.httpPost("login/1/login",{username: $scope.user.usr,password:$scope.user.pws}).then(function(data){
             console.log(data.data.resultado)
             if (data.data.resultado==null){
-                localStorage.setItem('userName', $scope.user.usr);
                 alert("datos erroneos");
                 $location.url("main");
             }
