@@ -75,7 +75,7 @@ exports.readPacienteByCedula = function(req, res){
 //Actualiza un paciente
 exports.updatePaciente = function(req, res){
     var tipo = "findOneAndUpdate";
-    var query = {cedula: req.params.ced, set: {$set: req.body}};
+    var query = {id: {cedula: req.params.ced} , set: {$set: req.body}};
     var modelo = Paciente;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function(json){

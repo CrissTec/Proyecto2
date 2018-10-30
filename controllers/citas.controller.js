@@ -31,14 +31,16 @@ exports.sacarCita = function (req, res) {
 exports.cancelarCitaPaciente = function (req, res) {
     var tipo = "findOneAndUpdate";
     //fechas
+    /*
     var hoy = new Date(Date.now())
-    var ayer = new Date()
+    var ayer = new Date(hoy)
     ayer.setDate(hoy.getDate() - 1);
     ayer.setMonth(hoy.getMonth());
     ayer.setFullYear(hoy.getFullYear());
     ayer.setHours(hoy.getHours());
-    var constraints = { _id: req.params.id, fecha: { $lte: ayer } };
-    var query = { id: constraints, set: { estado: "Cancelada por persona" } };
+    */
+    var constraints = { _id: req.params.id /*, fecha: { $lte: ayer } */ };
+    var query = { id: constraints, set: { $set : {estado: "Cancelada por persona" }} };
     var modelo = Cita;
     var nodo = req.params.nodo
     ConnectDB(nodo, tipo, modelo, query, function (json) {

@@ -1,23 +1,16 @@
 var app=angular.module("B2")
 
+
 app.config(function($routeProvider) {
     $routeProvider
-    .when("/expediente", {
-        templateUrl : "./../html/expediente/home.html",
-        controller : 'expedienteController'
-    })
-    .when("/expediente/paciente", {
-        templateUrl : "./../html/expediente/paciente.html",
-        controller : 'expedienteController'
-    })
-    .when("/expediente/paciente/all", {
-        templateUrl : "./../html/expediente/pacientes.html",
-        controller : 'expedienteController'
+    .when("/expediente/cita-secre", {
+        templateUrl : "./../html/expediente/citasecre.html",
+        controller : 'citaSecreController'
     })
     });
 
 
-app.controller('expedienteController', function($scope,connectApi){
+app.controller('citaSecreController', function($scope,connectApi){
 
 
     $scope.filter_by_ced = "";
@@ -98,5 +91,54 @@ app.controller('expedienteController', function($scope,connectApi){
 
     }
 
+
+
+    //-------------------------------------------------------------------------------------------
+    //CITAS
+    //-------------------------------------------------------------------------------------------
+    
+
+    
+    $scope.citas = [
+        {id: 1,nombre: "Cita1", lugar: "San Jose", tipo:"Ebais"},
+        {id: 2,nombre: "Cita2", lugar: "Heredia", tipo:"Hospital"},
+        {id: 3,nombre: "Cita3", lugar: "Alajuela", tipo:"Clinica"},
+        {id: 4,nombre: "Cita4", lugar: "Cartago", tipo:"Hospital"},
+    ];
+
+    
+    $scope.cita = $scope.citas[0];
+    $scope.citanuevo = {id: 1, nombre: "", lugar: "", tipo:""};
+
+
+
+    $scope.setCita = function(e){
+        // $scope.centro = e;
+        $scope.cita = {id:e.id,nombre: e.nombre, lugar: e.lugar, tipo: e.tipo};
+    };
+    $scope.citaNuevo = function(){
+        $scope.cita = $scope.citanuevo;
+    };
+
+    $scope.updateCita = function(){
+        for(var i = 0; i < $scope.citas.length;i++){
+            if ($scope.citas[i].id == $scope.cita.id){
+                $scope.citas[i]= $scope.cita;
+                break;
+            }
+        }
+        $scope.cita = {id:0,nombre: "", lugar: "", tipo:""};
+    }
+
+    $scope.removeCita = function(){
+        for(var i = 0; i < $scope.citas.length;i++){
+            if ($scope.citas[i].id == $scope.cita.id){
+                $scope.citas.splice(i,1);
+                $scope.completedTask=true;
+                break;
+            }
+        }
+        $scope.cita = {id:0,nombre: "", lugar: "", tipo:""};
+    }
 
 })

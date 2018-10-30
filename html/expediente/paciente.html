@@ -12,7 +12,7 @@
     <div class="row oms-toolbar">
         <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="oms-form-group">
-                <input class="form-control oms-input green" placeholder="buscar paciente" type="text" />
+                <input ng-model="filter_by_ced" class="form-control oms-input green" placeholder="buscar paciente" type="text" />
                 <span class="oms-input-group-btn">
                     <a href="" class="oms-btn oms-btn-green">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -41,9 +41,9 @@
         <a href="" ng-if="pacientes == null || empty(pacientes)" class="list-group-item disabled">
             No se ha encontrado ninguna resultado
         </a>
-        <a href="" ng-repeat="a in pacientes" class="list-group-item" data-toggle="modal" data-target="#basicModal" ng-click="setPaciente(a)">
+        <a href="" ng-repeat="a in pacientes | filter : filter_by_ced" class="list-group-item" data-toggle="modal" data-target="#basicModal" ng-click="setPaciente(a)">
             <div class="oms-h3 oms-roboto oms-light-blue-text">
-                {{a.nombre}}
+                {{a.cedula}} - {{a.nombre}} {{a.apellido}}
             </div>
             {{a.lugar}}
         </a>
@@ -66,13 +66,13 @@
 
                     <div class="oms-roboto oms-h1">{{paciente.nombre}}</div>
                     <div class="oms-roboto">Cedula: </div>
-                    <input class="form-control oms-input" type="text" ng-model="paciente.cedula" />
+                    <input ng-readonly="true" class="form-control oms-input" type="text" ng-model="paciente.cedula" />
                     <div class="oms-roboto">Nombre: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.nombre" />
                     <div class="oms-roboto">Apellido: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.apellido" />
                     <div class="oms-roboto">Fecha de nacimiento: </div>
-                    <input  type="date" class="form-control oms-input" type="text" ng-model="paciente.fechaNacimiento" />
+                    <input class="form-control oms-input" type="text" ng-model="paciente.fechaNacimiento" />
 
 
                     <div class="oms-roboto">Tipo de sangre: </div>
@@ -84,14 +84,45 @@
                     <div class="oms-roboto">Lugar de residencia: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.lugarDeResidencia" />
 
-                    <div class="oms-roboto">Telefono: </div>
-                    <input class="form-control oms-input" type="text" ng-model="paciente.telefono" />
-                    <div class="oms-roboto">Nombre de usuario: </div>
+                    <div class="oms-roboto oms-h3">Telefono: </div>
+
+                    <div class="list-group">
+                        <a href="" ng-show="listEmpty(paciente.telefono)" class="list-group-item disabled">
+                            No se ha encontrado ninguna resultado
+                        </a>
+
+                        <div ng-repeat="telefono in paciente.telefono track by $index" class="list-group-item">
+                            <div class="oms-form-group">
+                                <input ng-model="paciente.telefono[$index]" class="form-control oms-input red" style="width: 290px;" placeholder="sintoma"
+                                    type="text" />
+                                <span class="oms-input-group-btn">
+                                    <a ng-click="paciente.telefono.splice($index,1)" href="" class="oms-btn oms-btn-red">
+                                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                        Borrar
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <div class="pull-right">
+                                        <a ng-click="addTelefono()" class="oms-btn oms-btn-blue align-center" href="">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            Agregar telefono
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="oms-roboto">Nombre de usuario: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.username" />
 
                     <div class="oms-roboto">Contraseña: </div>
                     <input type="password" class="form-control oms-input" type="text" ng-model="paciente.password" />
-                    <br>
+                    <br> -->
                 </div>
                 <div class="modal-footer">
                     <div class="oms-btn-group">
@@ -122,15 +153,15 @@
                     <h4 class="modal-title" id="myModalLabel">Informacion</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="oms-roboto oms-h1">{{paciente.nombre}}</div>
+                    <div class="oms-roboto oms-h1">{{paciente.cedula}} - {{paciente.nombre}} {{paciente.apellido}}</div>
                     <div class="oms-roboto">Cedula: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.cedula" />
                     <div class="oms-roboto">Nombre: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.nombre" />
                     <div class="oms-roboto">Apellido: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.apellido" />
-                    <div  class="oms-roboto">Fecha de nacimiento: </div>
-                    <input  type="date" class="form-control oms-input" type="text" ng-model="paciente.fechaNacimiento" />
+                    <div class="oms-roboto">Fecha de nacimiento: </div>
+                    <input class="form-control oms-input" type="text" ng-model="paciente.fechaNacimiento" />
 
 
                     <div class="oms-roboto">Tipo de sangre: </div>
@@ -142,8 +173,39 @@
                     <div class="oms-roboto">Lugar de residencia: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.lugarDeResidencia" />
 
-                    <div class="oms-roboto">Telefono: </div>
-                    <input class="form-control oms-input" type="text" ng-model="paciente.telefono" />
+                    <div class="oms-roboto oms-h3">Telefono: </div>
+                    <div class="list-group">
+                            <a href="" ng-show="listEmpty(paciente.telefono)" class="list-group-item disabled">
+                                No se ha encontrado ninguna resultado
+                            </a>
+    
+                            <div ng-repeat="telefono in paciente.telefono track by $index" class="list-group-item">
+                                <div class="oms-form-group">
+                                    <input ng-model="paciente.telefono[$index]" class="form-control oms-input red" style="width: 290px;" placeholder="sintoma"
+                                        type="text" />
+                                    <span class="oms-input-group-btn">
+                                        <a ng-click="paciente.telefono.splice($index,1)" href="" class="oms-btn oms-btn-red">
+                                            <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                            Borrar
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+    
+                            <div class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                        <div class="pull-right">
+                                            <a ng-click="addTelefono()" class="oms-btn oms-btn-blue align-center" href="">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                Agregar telefono
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     <div class="oms-roboto">Nombre de usuario: </div>
                     <input class="form-control oms-input" type="text" ng-model="paciente.username" />
 
